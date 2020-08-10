@@ -2,6 +2,7 @@
 .idea/
 
 # generated data
+data/
 data.zip
 
 

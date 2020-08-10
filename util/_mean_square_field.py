@@ -33,7 +33,7 @@ class _MeanSquareField:
         n_antennas = self.cfa.n_antennas
 
         # determine number of phase steps
-        n_steps = int(np.floor(max_phaseshifts ** (1 / (n_antennas-1))))
+        n_steps = int(np.floor(max_phaseshifts ** (1 / (n_antennas - 1))))
 
         # determine number of points
         n_shifts = int(n_steps ** (n_antennas - 1))
@@ -48,12 +48,12 @@ class _MeanSquareField:
         for idx_antenna in range(n_antennas - 1):
             rep1 = int(n_steps ** (n_antennas - 2 - idx_antenna))
             rep2 = int(n_steps ** idx_antenna)
-            phases[:, idx_antenna+1] = np.tile(unique_phases, (rep1, rep2)).T.reshape(-1)
+            phases[:, idx_antenna + 1] = np.tile(unique_phases, (rep1, rep2)).T.reshape(-1)
 
         # add a 'randomness' using a gaussian distribution
         if randomness is not 0:
             phases[:, 1:n_antennas] += unique_phases[1] * \
-                                      np.random.normal(0, randomness*0.2, (n_shifts, n_antennas-1))
+                                       np.random.normal(0, randomness * 0.2, (n_shifts, n_antennas - 1))
 
         # set attributes
         self.phases = phases
