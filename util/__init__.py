@@ -3,8 +3,6 @@ import zipfile
 from pathlib import Path
 from typing import Union
 
-import numpy as np
-
 from ._complex_field_per_antenna import _ComplexFieldPerAntenna
 from ._drawing_interchange_format import _DrawingInterchangeFormat
 from ._mean_square_field import _MeanSquareField
