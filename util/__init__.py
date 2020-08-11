@@ -15,7 +15,7 @@ def cst_to_dataset(src: Union[str, Path],
                    width: int,
                    height: int,
                    efield2_max: float,
-                   max_samples: int,
+                   max_samples: Union[int, float],
                    phase_randomness: float,
                    projection: str = '2d',
                    zipped: bool = True):
