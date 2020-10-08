@@ -23,7 +23,7 @@ def cst_to_dataset(partition_id: int):
     timer = time()
 
     # create print object which logs the print messages to a log.txt file
-    print_ = Print('log.txt', partition_id)
+    print_ = Print('log.txt', partition_id).log
 
     # create msf and sar dataset
     for dataset in ['msf', 'sar']:
@@ -62,17 +62,17 @@ def cst_to_dataset(partition_id: int):
         for idx_project, path_project in enumerate(paths_valid_project):
 
             # log
-            print('importing project (%i/%i)...' %
+            print_('importing project (%i/%i)...' %
                   (idx_project + 1, n_projects))
-            print('\t%s ' % str(path_project))
+            print_('\t%s ' % str(path_project))
 
             # add input images to dataset
-            print('\tadding input images...')
+            print_('\tadding input images...')
             for img in ['conductivity', 'density', 'model', 'permittivity']:
                 src = path_project.joinpath('maps', img + '.png')
                 dst = 'input/%s_%04i.png' % (img, cnt_in)
                 zipfile.write(src, dst)
-            print('\t\t...done')
+            print_('\t\t...done')
 
             # get the path to each output image
             paths_output = sorted(list(
@@ -85,7 +85,7 @@ def cst_to_dataset(partition_id: int):
                 cnf = json.load(file)
 
             # add each output image to the dataset
-            print('\tadding output images...')
+            print_('\tadding output images...')
             n_outputs = len(list(paths_output))
             pct = 0
             pct_step = 10
@@ -95,7 +95,7 @@ def cst_to_dataset(partition_id: int):
             timer5_ = 0.
             for idx, src in enumerate(paths_output):
                 if idx % (n_outputs / (100 / pct_step)) == 0:
-                    print('\t\t%i%% (%.2f sec)' % (pct, time() - timer2))
+                    print_('\t\t%i%% (%.2f sec)' % (pct, time() - timer2))
                     # print('\t\t\tCnf: %.2f sec' % timer3_)
                     # print('\t\t\tCSV: %.2f sec' % timer4_)
                     # print('\t\t\tWrit: %.2f sec' % timer5_)
@@ -122,16 +122,16 @@ def cst_to_dataset(partition_id: int):
                 # update counter for output images
                 cnt_out += 1
 
-            print('\t\t100%')
-            print('\t\t...done')
+            print_('\t\t100%')
+            print_('\t\t...done')
 
             # update counter for input images
             cnt_in += 1
 
         # add csv to dataset
-        print('adding dataset.csv...')
+        print_('adding dataset.csv...')
         zipfile.writestr('dataset.csv', csv())
-        print('\t...done')
+        print_('\t...done')
 
 
 def get_cnf(cnf, src) -> [List[dict], dict]:
