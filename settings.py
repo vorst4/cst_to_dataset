@@ -1,10 +1,14 @@
 from numpy import pi
+import os
+
+is_running_on_desktop = os.name == 'nt'
 
 
 class Paths:
-    # src = 'C:/Users/Home/Documents/generated_projects'
-    src = 'C:/Users/Dennis/Documents/generated_projects'
-    dst = 'data.zip'
+    if is_running_on_desktop:
+        src = 'C:/Users/Dennis/Documents/generated_projects'
+    else:
+        src = '/home/tue/s111167/generated_projects'
 
 
 class Imgs:
