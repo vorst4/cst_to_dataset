@@ -50,11 +50,16 @@ def cst_to_dataset(partition_id: int):
             ids_valid = ids_valid[0:(MAX_PROJECTS - 1)]
         n_projects = len(ids_valid)
 
+        # get the valid project paths
+        paths_valid_project = []
+        for idx in ids_valid:
+            paths_valid_project.append(paths_project[idx])
+
         # initialize csv file object
         csv = CSV(n_projects)
 
         # loop through each project
-        for idx_project, path_project in enumerate(paths_project):
+        for idx_project, path_project in enumerate(paths_valid_project):
 
             # log
             print('importing project (%i/%i)...' %
