@@ -14,14 +14,14 @@ then
 fi
 
 # verify that number of partitions is not > 3
-if [ $2 -gt 3 ]
+if [ $1 -gt 3 ]
 then
   echo "ERROR: partition id is > 3"
   exit 1
 fi
 
 # verify that number of partitions is >= 0
-if [ $2 -lt 0 ]
+if [ $1 -lt 0 ]
 then
   echo "ERROR: partition id is < 0"
   exit 1
@@ -33,18 +33,15 @@ declare -a partitions=("tue.default.q"
                        "elec-em.gpu.q")
 
 # execute jobs
-for (( job_id=0; job_id<$1; job_id++ ))
-do
-  export partition_id=$2
-  sbatch  --job-name=projects_to_dataset_$job_id\_$2 \
-          --nodes=1 \
-          --ntasks=1 \
-          --cpus-per-task=16 \
-          --time=10-00:00:00 \
-          --partition=${partitions[$2]} \
-          --output=output \
-          --error=error \
-          --mail-user=d.m.n.v.d.vorst@student.tue.nl \
-          --mail-type=ALL \
-          task.sh
-done
+export partition_id=$1
+sbatch  --job-name=projects_to_dataset_$1 \
+        --nodes=1 \
+        --ntasks=1 \
+        --cpus-per-task=16 \
+        --time=10-00:00:00 \
+        --partition=${partitions[$1]} \
+        --output=output \
+        --error=error \
+        --mail-user=d.m.n.v.d.vorst@student.tue.nl \
+        --mail-type=ALL \
+        task.sh
