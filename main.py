@@ -1,9 +1,16 @@
-import util
+from util.cst_to_dataset import cst_to_dataset
+import os
+import argparse
 
-util.cst_to_dataset(src='C:/Users/Dennis/Documents/cst projects/simple v6/Export',
-                    dst=util.default_dst,
-                    width=32,
-                    height=32,
-                    efield2_max=4e3,
-                    max_samples=50e3,
-                    phase_randomness=0)
+is_running_on_desktop = os.name == 'nt'
+
+# on the server, the partition id is passed as an argument
+if is_running_on_desktop:
+    partition_id = 0
+else:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--partition_id", help="server partition id", type=int)
+    job_id = parser.parse_args().job_id
+    partition_id = parser.parse_args().partition_id
+
+cst_to_dataset(partition_id)

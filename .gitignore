@@ -3,9 +3,9 @@
 
 # generated data
 data/
-data.zip
-
-
+dataset*
+log.txt
+tmp.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
