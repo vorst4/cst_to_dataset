@@ -10,7 +10,6 @@ if is_running_on_desktop:
 else:
     parser = argparse.ArgumentParser()
     parser.add_argument("--partition_id", help="server partition id", type=int)
-    job_id = parser.parse_args().job_id
     partition_id = parser.parse_args().partition_id
 
 cst_to_dataset(partition_id)

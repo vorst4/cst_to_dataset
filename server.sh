@@ -35,9 +35,8 @@ declare -a partitions=("tue.default.q"
 # execute jobs
 for (( job_id=0; job_id<$1; job_id++ ))
 do
-  export job_id=$job_id
   export partition_id=$2
-  sbatch  --job-name=CST_project_generator_$job_id_$2 \
+  sbatch  --job-name=projects_to_dataset_$job_id\_$2 \
           --nodes=1 \
           --ntasks=1 \
           --cpus-per-task=16 \
