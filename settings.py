@@ -12,8 +12,8 @@ class Paths:
 
 
 class Imgs:
-    width = 64
-    height = 64
+    width = 32
+    height = width
 
 
 class MSF:
